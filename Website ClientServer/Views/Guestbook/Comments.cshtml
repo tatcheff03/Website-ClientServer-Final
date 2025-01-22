@@ -1,0 +1,39 @@
+﻿@model IEnumerable<WebApplication1.Models.GuestBookEntry>
+
+@{
+    ViewBag.Title = "User Comments";
+}
+
+@using Microsoft.AspNet.Identity
+<h2>User Comments</h2>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <a href="@Url.Action("MyComments", "Guestbook")" class="btn btn-success">View My Comments</a>
+}
+
+<table class="table">
+   <thead>
+    <tr>
+        <th>Message</th>
+        <th>Posted By</th>
+        <th>Date Added</th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var entry in Model)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("Show", "Guestbook", new { id = entry.Id })">
+                        @entry.Message
+                    </a>
+                </td>
+                <td>@entry.Name</td>
+                <td>@entry.DateAdded.ToString("g")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="@Url.Action("Index", "Guestbook")" class="btn btn-primary">Return to Entries</a>

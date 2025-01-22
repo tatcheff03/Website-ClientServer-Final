@@ -1,0 +1,38 @@
+﻿@model IEnumerable<WebApplication1.Models.GuestBookEntry>
+
+@{
+    var selectedDate = ViewBag.SelectedDate as DateTime?;
+}
+
+<h2>Comments on @(selectedDate.HasValue ? selectedDate.Value.ToString("dd-MM") : "No Date Selected")</h2>
+@{
+    ViewBag.Title = "Comments by Date";
+}
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Message</th>
+            <th>Posted By</th>
+            <th>Date Added</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var entry in Model)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("Show", "Guestbook", new { id = entry.Id })">
+                        @entry.Message
+                    </a>
+                </td>
+                <td>@entry.Name</td>
+                <td>@entry.DateAdded.ToString("g")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="@Url.Action("Index", "Guestbook")" class="btn btn-primary">Return to Entries</a>

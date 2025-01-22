@@ -1,0 +1,40 @@
+﻿@model IEnumerable<WebApplication1.Models.GuestBookEntry>
+@{
+    ViewBag.Title = "My Comments";
+}
+
+<h2>My Comments</h2>
+<table class="table">
+    
+    <thead>
+        <tr>
+            <th>Message</th>
+            <th>Date Added</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        @foreach (var entry in Model)
+        {
+            <tr>
+                <td>@entry.Message</td>
+                <td>
+                    <a href="@Url.Action("CommentsByDate", "Guestbook", new { date = entry.DateAdded.ToString("yyyy-MM-dd") })">
+                        @entry.DateAdded.ToString("g")
+                    </a>
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", "Guestbook", new { id = entry.Id })" class="btn btn-primary">Edit</a>
+                    <form action="@Url.Action("Delete", "Guestbook", new { id = entry.Id })" method="post" style="display: inline;">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this comment?');">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        } 
+    </tbody>
+</table>
+
+<p>
+    <a href="@Url.Action("Index", "Guestbook")" class="btn btn-primary">Return to Entries</a>
+</p>
