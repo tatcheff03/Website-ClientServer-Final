@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Lists";
+}
+
+<h2>Guestbook Entries</h2>
+
+<p>
+    <a href="@Url.Action("CommentsSummary", "Guestbook")" class="btn btn-outline-dark">View Summary</a>
+
+
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a href="@Url.Action("Create", "Guestbook")" class="btn btn-secondary">Add new entry</a>
+        <a href="@Url.Action("MyComments", "Guestbook")" class="btn btn-dark">Manage My Comments</a>
+    }
+
+</p>
+
+
+@foreach (var entry in ViewBag.Entries)
+{
+    <section class="container">
+        <header>
+            
+            <h3>
+                <a href="@Url.Action("Show", "Guestbook", new { id = entry.Id })">
+                    @entry.Message
+                </a>
+            </h3>
+        </header>
+        <p>
+            Posted by @entry.Name on
+            <a href="@Url.Action("CommentsByDate", "Guestbook", new { date = entry.DateAdded.ToString("yyyy-MM-dd") })">
+                @entry.DateAdded.ToString("d.M.yyyy") </a>
+
+        </p>
+</section>
+
+}

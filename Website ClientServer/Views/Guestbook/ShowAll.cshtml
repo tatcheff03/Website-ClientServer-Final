@@ -1,0 +1,23 @@
+﻿@model IEnumerable<WebApplication1.Models.GuestBookEntry>
+
+<h2>All Entries</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Message</th>
+            <th>Posted By</th>
+            <th>Date Added</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var entry in Model)
+        {
+            <tr>
+                <td>@entry.Message</td>
+                <td>@entry.Name</td>
+                <td>@entry.DateAdded</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="@Url.Action("Index", "Guestbook")" class="btn btn-primary">Back to Entries</a>

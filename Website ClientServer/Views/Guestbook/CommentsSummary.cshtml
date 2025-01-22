@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Comments Summary";
+}
+
+<h2>Comments Summary</h2>
+
+@model IEnumerable<WebApplication1.Models.CommentsSummary>
+
+
+<table class="table table-striped table-bordered">
+   
+        <tr>
+            <th class="text-center">Number of comments</th>
+            <th class="text-center">Username</th>
+        </tr>
+    
+    <tbody>
+        @foreach (var summaryRow in Model)
+        {
+            <tr>
+                <td class="text-center">@summaryRow.numComments</td>
+                <td class="text-center">@summaryRow.username</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+<p>
+    <a href="@Url.Action("Index", "Guestbook")" class="btn btn-primary">Return to Entries</a>
+</p>
